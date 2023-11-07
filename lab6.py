@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import stats
+import matplotlib.pyplot as plt
 
 def huber(x: np.array, k: float):
     phi = lambda elem: elem if abs(elem) < k else k * np.sign(elem)
@@ -16,8 +17,18 @@ def sigm3_rull(x: np.array):
 
     return clear_res
 
+def boxplot_rull(x: np.array):
+    outlyings = plt.boxplot(x)
+    clear_res = [i for i in x if not i in outlyings["fliers"]]
+    # x = list(x)
+    # for xx in outlyings["fliers"]:
+    #     x
+    return clear_res
+
 def double_stage_mean(x: np.array):
-    x = sigm3_rull(x)
+    # x = sigm3_rull(x)
+    x = boxplot_rull(x)
+    x = huber(x, 1.44)
     return np.mean(x)
 
 distributions = {
