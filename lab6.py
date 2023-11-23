@@ -10,7 +10,7 @@ def huber(x: np.array, k: float):
 def sigm3_rull(x: np.array):
 
     xmean = np.mean(x)
-    xvar = np.var(x)
+    xvar = np.std(x)
     is_in_3sigm = lambda xi: np.abs(xi - xmean) < 3*xvar
 
     clear_res = [val for val in x if is_in_3sigm(val)]
@@ -28,7 +28,7 @@ def boxplot_rull(x: np.array):
 def double_stage_mean(x: np.array):
     # x = sigm3_rull(x)
     x = boxplot_rull(x)
-    x = huber(x, 1.44)
+    # x = huber(x, 1.44)
     return np.mean(x)
 
 distributions = {

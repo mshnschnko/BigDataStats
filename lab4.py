@@ -192,7 +192,7 @@ if __name__ == "__main__":
     plt.title("Среднесуточная температура температура")
     plt.grid()
     plt.legend()
-    plt.show()
+    # plt.show()
 
     FFT_orig = FFT(np.array(data['mean_temp']))
     print(len(FFT_orig))
@@ -202,6 +202,7 @@ if __name__ == "__main__":
     plt.figure()
     plt.plot(ordi[1:], FFT_orig[1:len(FFT_orig)//2]/len(FFT_orig), label='FFT(x)')
     plt.grid()
+    plt.title("Амплитудный спектр")
     plt.show()
 
     # plt.figure()
@@ -210,21 +211,21 @@ if __name__ == "__main__":
     checkKendall(np.array(data['mean_temp'])-trend)
     # print(*check_kendall(trend, np.array(data['mean_temp'])))
 
-    H, c, data = compute_Hc(data['mean_temp'], kind='random_walk', simplified=False)
+    # H, c, data = compute_Hc(data['mean_temp'], kind='random_walk', simplified=False)
 
-    print(f"Hurst = {H}")
-    if math.isclose(H, 0.5, rel_tol=1e-5):
-        print("Ряд случаен")
-    elif H > 0.5:
-        print("Персистентный ряд (сохраняет тренд)")
-    elif H < 0.5:
-        print("Антиперсистентный ряд")
+    # print(f"Hurst = {H}")
+    # if math.isclose(H, 0.5, rel_tol=1e-5):
+    #     print("Ряд случаен")
+    # elif H > 0.5:
+    #     print("Персистентный ряд (сохраняет тренд)")
+    # elif H < 0.5:
+    #     print("Антиперсистентный ряд")
     
-    plt.figure()
-    plt.plot(data[0], c*data[0]**H, color="deepskyblue", label="$cn^H$")
-    plt.scatter(data[0], data[1], color="purple", label="$R/s\ факт.$")
-    plt.legend()
-    plt.xlabel("n")
-    plt.ylabel("$R/s$")
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(data[0], c*data[0]**H, color="deepskyblue", label="$cn^H$")
+    # plt.scatter(data[0], data[1], color="purple", label="$R/s\ факт.$")
+    # plt.legend()
+    # plt.xlabel("n")
+    # plt.ylabel("$R/s$")
+    # plt.grid()
+    # plt.show()
